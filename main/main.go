@@ -20,9 +20,10 @@ func main() {
 		group.POST("/course", service.AddCourse)
 		group.DELETE("/course", service.DeleteCourse)
 		// 会员相关
-		group.GET("/member/:id")
-		group.POST("/member")
-		group.PUT("/member") // 修改信息
+		group.GET("/member/:id", service.GetMember)
+		group.GET("/member/list", service.ListMember)
+		group.POST("/member", service.AddMember)
+		//group.PUT("/member") // 修改信息
 		// 记录相关
 		group.POST("/record")
 		group.PUT("/record")
