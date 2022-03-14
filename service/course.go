@@ -8,7 +8,7 @@ import (
 )
 
 // mock
-var m = map[string]model.Course{
+var mCourse = map[string]model.Course{
 	"1": {1, "常规"},
 	"2": {2, "拉伸"},
 	"3": {3, "搏击"},
@@ -18,7 +18,7 @@ var m = map[string]model.Course{
 // GetCourse 查询课程
 func GetCourse(c *gin.Context) {
 	id := c.Param("id")
-	course := m[id]
+	course := mCourse[id]
 	marshal, err := json.Marshal(course)
 	if err != nil {
 		return
@@ -27,11 +27,15 @@ func GetCourse(c *gin.Context) {
 }
 
 // ListCourse 查询列表
+// TODO : 切片排序
 func ListCourse(c *gin.Context) {
 	var list []model.Course
-	for _, v := range m {
+	for _, v := range mCourse {
 		list = append(list, v)
 	}
+	//sort.Slice(list, func(i, j int) bool {
+	//	return i-j > 0
+	//})
 	marshal, err := json.Marshal(list)
 	if err != nil {
 		return
@@ -47,7 +51,7 @@ func AddCourse(c *gin.Context) {
 			Id:   5, // 数据库回填主键
 			Name: name,
 		}
-		m["5"] = mc
+		mCourse["5"] = mc
 	}
 	c.String(http.StatusOK, "添加成功")
 }
@@ -55,8 +59,8 @@ func AddCourse(c *gin.Context) {
 // DeleteCourse 删除课程
 func DeleteCourse(c *gin.Context) {
 	if id, ok := c.GetPostForm("id"); ok {
-		if _, ok := m[id]; ok {
-			delete(m, id)
+		if _, ok := mCourse[id]; ok {
+			delete(mCourse, id)
 		}
 	}
 	c.String(http.StatusOK, "删除成功")

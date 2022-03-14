@@ -10,9 +10,10 @@ func main() {
 	group := engine.Group("/api/v1")
 	{
 		// 教练相关
-		group.GET("/coach/:id")
-		group.POST("/coach")
-		group.DELETE("/coach")
+		group.GET("/coach/:id", service.GetCoach)
+		group.GET("/coach/list", service.ListCoach)
+		group.POST("/coach", service.AddCoach)
+		group.DELETE("/coach", service.DeleteCoach)
 		// 课程相关
 		group.GET("/course/:id", service.GetCourse)
 		group.GET("/course/list", service.ListCourse)
