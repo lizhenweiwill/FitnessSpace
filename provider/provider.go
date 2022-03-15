@@ -1,25 +1,25 @@
 package provider
 
 import (
+	"FitnessSpace/model"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"sync"
 )
 
-var once sync.Once
-var db *gorm.DB
-
 func NewDB() *gorm.DB {
-	once.Do(func() {
-		db = ConnectDatabase(
-			"root",
-			"123456",
-			"192.168.0.104:3309",
-			"fitness_space",
-		)
-	})
+	db := ConnectDatabase(
+		"root",
+		"123456",
+		"192.168.0.104:3309",
+		"fitness_space",
+	)
+	err := db.AutoMigrate(&model.Coach{}, &model.Course{}, &model.Member{})
+	if err != nil {
+		println("创建数据表出错")
+		return nil
+	}
 	return db
 }
 

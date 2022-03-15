@@ -12,7 +12,7 @@ type Coach struct {
 	UpdatedAt time.Time
 }
 
-// Course 课程`gorm:"index"`
+// Course 课程
 type Course struct {
 	ID        uint   `json:"code" gorm:"primaryKey;autoIncrement;comment:唯一主键"`
 	Name      string `json:"name" gorm:"not null;unique;comment:课程名称"`

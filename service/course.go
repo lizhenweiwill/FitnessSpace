@@ -29,24 +29,21 @@ func ListCourse(c *gin.Context) {
 }
 
 // AddCourse 新增课程
-// TODO : 数据库主键回填
 func AddCourse(c *gin.Context) {
-	//if name, ok := c.GetPostForm("name"); ok {
-	//mc := model.Course{
-	//	Id:   5, // 数据库回填主键
-	//	Name: name,
-	//}
-	//mCourse["5"] = mc
-	//}
-	//c.String(http.StatusOK, "添加成功")
+	name, ok := c.GetPostForm("name")
+	if !ok {
+		return
+	}
+	dao.AddOneCourse(name)
+	c.JSON(http.StatusOK, gin.H{"message": "添加成功"})
 }
 
 // DeleteCourse 删除课程
 func DeleteCourse(c *gin.Context) {
-	//if id, ok := c.GetPostForm("id"); ok {
-	//	if _, ok := mCourse[id]; ok {
-	//		delete(mCourse, id)
-	//	}
-	//}
-	//c.String(http.StatusOK, "删除成功")
+	id, ok := c.GetPostForm("id")
+	if !ok {
+		return
+	}
+	dao.DeleteCourse(id)
+	c.JSON(http.StatusOK, gin.H{"message": "删除成功"})
 }
