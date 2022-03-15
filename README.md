@@ -49,23 +49,24 @@
 ## API
 
 - 教练
-  - 查询教练 GET /api/v1/coach/:id
-  - 教练列表 GET /api/v1/coach/list
-  - 增加教练 POST /api/v1/coach
-  - 删除教练 DELETE /api/v1/coach
+    - 查询教练 GET /api/v1/coach/:id
+    - 教练列表 GET /api/v1/coach/list
+    - 增加教练 POST /api/v1/coach
+    - 删除教练 DELETE /api/v1/coach
 - 课程
-  - 查询课程 GET /api/v1/course/:id
-  - 课程列表 GET /api/v1/course/list
-  - 增加课程 POST /api/v1/course
-  - 删除课程 DELETE /api/v1/course
+    - 查询课程 GET /api/v1/course/:id
+    - 课程列表 GET /api/v1/course/list
+    - 增加课程 POST /api/v1/course
+    - 删除课程 DELETE /api/v1/course
 - 会员
-  - 查询会员 GET /api/v1/member/:id
-  - 会员列表 GET /api/v1/member/list
-  - 新增会员 POST /api/v1/member
-  - 修改信息 PUT /api/v1/member
+    - 查询会员 GET /api/v1/member/:id
+    - 会员列表 GET /api/v1/member/list
+    - 新增会员 POST /api/v1/member
+    - 修改信息 PUT /api/v1/member
 - 记录
-  - 购买记录 POST /api/v1/record
-  - 核销记录 POST /api/v1/record
+    - 记录统计 GET /api/v1/record/list
+    - 购买记录 POST /api/v1/record
+    - 核销记录 DELETE /api/v1/record
 
 ## 环境
 

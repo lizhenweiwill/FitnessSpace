@@ -5,26 +5,42 @@ import (
 )
 
 func TestGetOneCourse(t *testing.T) {
-	course := GetOneCourse("1")
+	course, err := GetOneCourse("1")
+	if err != nil {
+		return
+	}
 	t.Log(course)
 }
 
 func TestGetAllCourse(t *testing.T) {
-	course := GetAllCourse()
+	course, err := GetAllCourse()
+	if err != nil {
+		return
+	}
 	t.Log(course)
 }
 
 func TestAddOneCourse(t *testing.T) {
-	course := AddOneCourse("常规")
-	t.Log(course)
+	err := AddOneCourse("常规")
+	if err != nil {
+		return
+	}
+	t.Log("操作成功")
 }
 
 func TestDeleteCourse(t *testing.T) {
-	course := DeleteCourse("10")
-	t.Log(course)
+	err := DeleteCourse("10")
+	if err != nil {
+		return
+	}
+	t.Log("操作成功")
 }
 
 func TestAddBatchesCourse(t *testing.T) {
 	cs := []string{"拉伸", "搏击", "体态纠正"}
-	AddBatchesCourse(cs)
+	err := AddBatchesCourse(cs)
+	if err != nil {
+		return
+	}
+	t.Log("操作成功")
 }

@@ -6,23 +6,35 @@ import (
 )
 
 func TestGetOneCoach(t *testing.T) {
-	course := GetOneCoach("1")
-	t.Log(course)
+	coach, err := GetOneCoach("1")
+	if err != nil {
+		return
+	}
+	t.Log(coach)
 }
 
 func TestGetAllCoach(t *testing.T) {
-	course := GetAllCoach()
-	t.Log(course)
+	coach, err := GetAllCoach()
+	if err != nil {
+		return
+	}
+	t.Log(coach)
 }
 
 func TestAddOneCoach(t *testing.T) {
-	course := AddOneCoach("振威", "will", "000000")
-	t.Log(course)
+	err := AddOneCoach("振威", "will", "000000")
+	if err != nil {
+		return
+	}
+	t.Log("操作成功")
 }
 
 func TestDeleteCoach(t *testing.T) {
-	course := DeleteCoach("1")
-	t.Log(course)
+	err := DeleteCoach("10")
+	if err != nil {
+		return
+	}
+	t.Log("操作成功")
 }
 
 func TestAddBatchesCoach(t *testing.T) {
@@ -30,5 +42,9 @@ func TestAddBatchesCoach(t *testing.T) {
 		{Name: "张发", Nick: "ZF", Pass: "111111"},
 		{Name: "王吉", Nick: "WJ", Pass: "222222"},
 	}
-	AddBatchesCoach(cs)
+	err := AddBatchesCoach(cs)
+	if err != nil {
+		return
+	}
+	t.Log("操作成功")
 }

@@ -4,32 +4,29 @@ import (
 	"FitnessSpace/model"
 )
 
-func GetOneCoach(id string) model.Coach {
-	c := model.Coach{}
-	db.Find(&c, id)
-	return c
+func GetOneCoach(id string) (model.Coach, error) {
+	var c model.Coach
+	tx := db.Find(&c, id)
+	return c, tx.Error
 }
 
-func GetAllCoach() (cs []model.Coach) {
-	result := db.Find(&cs)
-	if result.Error != nil {
-		println(result.Error.Error())
-	}
-	return cs
+func GetAllCoach() ([]model.Coach, error) {
+	var cs []model.Coach
+	tx := db.Find(&cs)
+	return cs, tx.Error
 }
 
-func AddOneCoach(name string, nick string, pass string) model.Coach {
-	c := model.Coach{Name: name, Nick: nick, Pass: pass}
-	db.Create(&c)
-	return c
+func AddOneCoach(name string, nick string, pass string) error {
+	tx := db.Create(&model.Coach{Name: name, Nick: nick, Pass: pass})
+	return tx.Error
 }
 
-func DeleteCoach(id string) model.Coach {
-	c := model.Coach{}
-	db.Delete(&c, id)
-	return c
+func DeleteCoach(id string) error {
+	tx := db.Delete(&model.Coach{}, id)
+	return tx.Error
 }
 
-func AddBatchesCoach(cs []model.Coach) {
-	db.CreateInBatches(cs, len(cs))
+func AddBatchesCoach(cs []model.Coach) error {
+	tx := db.CreateInBatches(cs, len(cs))
+	return tx.Error
 }

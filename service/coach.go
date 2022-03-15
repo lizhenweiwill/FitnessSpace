@@ -10,7 +10,10 @@ import (
 // GetCoach 查询教练
 func GetCoach(c *gin.Context) {
 	id := c.Param("id")
-	course := dao.GetOneCourse(id)
+	course, err := dao.GetOneCourse(id)
+	if err != nil {
+		return
+	}
 	marshal, err := json.Marshal(course)
 	if err != nil {
 		return
@@ -20,7 +23,10 @@ func GetCoach(c *gin.Context) {
 
 // ListCoach 查询列表
 func ListCoach(c *gin.Context) {
-	list := dao.GetAllCourse()
+	list, err := dao.GetAllCourse()
+	if err != nil {
+		return
+	}
 	marshal, err := json.Marshal(list)
 	if err != nil {
 		return
@@ -34,7 +40,10 @@ func AddCoach(c *gin.Context) {
 	if !ok {
 		return
 	}
-	dao.AddOneCourse(name)
+	err := dao.AddOneCourse(name)
+	if err != nil {
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{"message": "添加成功"})
 }
 
@@ -44,6 +53,9 @@ func DeleteCoach(c *gin.Context) {
 	if !ok {
 		return
 	}
-	dao.DeleteCourse(id)
+	err := dao.DeleteCourse(id)
+	if err != nil {
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{"message": "删除成功"})
 }

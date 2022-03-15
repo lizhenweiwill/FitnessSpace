@@ -25,6 +25,7 @@ func main() {
 		group.POST("/member", service.AddMember)
 		//group.PUT("/member") // 修改信息
 		// 记录相关
+		group.GET("/record/list")
 		group.POST("/record")
 		group.PUT("/record")
 	}

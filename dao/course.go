@@ -4,32 +4,29 @@ import (
 	"FitnessSpace/model"
 )
 
-func GetOneCourse(id string) model.Course {
+func GetOneCourse(id string) (model.Course, error) {
 	c := model.Course{}
-	db.Find(&c, id)
-	return c
+	tx := db.Find(&c, id)
+	return c, tx.Error
 }
 
-func GetAllCourse() (cs []model.Course) {
-	result := db.Find(&cs)
-	if result.Error != nil {
-		println(result.Error.Error())
-	}
-	return cs
+func GetAllCourse() ([]model.Course, error) {
+	var cs []model.Course
+	tx := db.Find(&cs)
+	return cs, tx.Error
 }
 
-func AddOneCourse(name string) model.Course {
-	c := model.Course{Name: name}
-	db.Create(&c)
-	return c
+func AddOneCourse(name string) error {
+	tx := db.Create(&model.Course{Name: name})
+	return tx.Error
 }
 
-func DeleteCourse(id string) model.Course {
-	c := model.Course{}
-	db.Delete(&c, id)
-	return c
+func DeleteCourse(id string) error {
+	tx := db.Delete(&model.Course{}, id)
+	return tx.Error
 }
 
-func AddBatchesCourse(cs []string) {
-	db.CreateInBatches(cs, len(cs))
+func AddBatchesCourse(cs []string) error {
+	tx := db.CreateInBatches(cs, len(cs))
+	return tx.Error
 }
