@@ -41,7 +41,7 @@
 
 ### 会员-课程-信息统计表
 
-> 【哪位会员】还剩【多少节】【什么课程】
+> 【哪位会员】的【什么课程】还剩【多少节】
 
 - 购买课程后，剩余课程数量增加。
 - 会员上课后，核销完毕数量减少。
@@ -65,8 +65,8 @@
     - 修改信息 PUT /api/v1/member
 - 记录
     - 记录统计 GET /api/v1/record/list
-    - 购买记录 POST /api/v1/record
-    - 核销记录 DELETE /api/v1/record
+    - 购买记录 POST /api/v1/record/buy
+    - 核销记录 POST /api/v1/record/end
 
 ## 环境
 

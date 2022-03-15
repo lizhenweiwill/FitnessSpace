@@ -23,11 +23,10 @@ func main() {
 		group.GET("/member/:id", service.GetMember)
 		group.GET("/member/list", service.ListMember)
 		group.POST("/member", service.AddMember)
-		//group.PUT("/member") // 修改信息
 		// 记录相关
-		group.GET("/record/list")
-		group.POST("/record")
-		group.PUT("/record")
+		group.GET("/record/list", service.ListRecord)
+		group.POST("/record/buy", service.AddBuyRecord)
+		group.POST("/record/end", service.AddEndRecord)
 	}
 	err := engine.Run(":8080")
 	if err != nil {

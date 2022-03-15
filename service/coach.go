@@ -10,7 +10,7 @@ import (
 // GetCoach 查询教练
 func GetCoach(c *gin.Context) {
 	id := c.Param("id")
-	course, err := dao.GetOneCourse(id)
+	course, err := dao.GetOneCoach(id)
 	if err != nil {
 		return
 	}
@@ -23,7 +23,7 @@ func GetCoach(c *gin.Context) {
 
 // ListCoach 查询列表
 func ListCoach(c *gin.Context) {
-	list, err := dao.GetAllCourse()
+	list, err := dao.GetAllCoach()
 	if err != nil {
 		return
 	}
@@ -40,7 +40,7 @@ func AddCoach(c *gin.Context) {
 	if !ok {
 		return
 	}
-	err := dao.AddOneCourse(name)
+	err := dao.AddOneCoach(name, name, name)
 	if err != nil {
 		return
 	}
@@ -53,7 +53,7 @@ func DeleteCoach(c *gin.Context) {
 	if !ok {
 		return
 	}
-	err := dao.DeleteCourse(id)
+	err := dao.DeleteCoach(id)
 	if err != nil {
 		return
 	}

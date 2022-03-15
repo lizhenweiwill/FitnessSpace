@@ -15,7 +15,16 @@ func NewDB() *gorm.DB {
 		"192.168.0.104:3309",
 		"fitness_space",
 	)
-	err := db.AutoMigrate(&model.Coach{}, &model.Course{}, &model.Member{})
+	var err error
+	err = db.AutoMigrate(&model.Coach{}, &model.Course{}, &model.Member{}, &model.Record{})
+	migratorBuy := db.Table("records_buy").Migrator()
+	if !migratorBuy.HasTable(&model.BuyRecord{}) {
+		err = migratorBuy.CreateTable(&model.BuyRecord{})
+	}
+	migratorEnd := db.Table("records_end").Migrator()
+	if !migratorEnd.HasTable(&model.EndRecord{}) {
+		err = migratorEnd.CreateTable(&model.EndRecord{})
+	}
 	if err != nil {
 		println("创建数据表出错")
 		return nil
