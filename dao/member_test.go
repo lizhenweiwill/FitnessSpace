@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"FitnessSpace/model"
 	"testing"
 )
 
@@ -21,9 +22,9 @@ func TestGetAllMember(t *testing.T) {
 }
 
 func TestAddOneMember(t *testing.T) {
-	err := AddOneMember(
-		"振威", "No.222222", "123000000", "wx_123", "http://www.xx.png",
-	)
+	err := AddOneMember(&model.MemberRO{
+		Name: "振威", Card: "No.222222", Phone: "123000000", WeiXin: "wx_123", Image: "http://www.xx.png",
+	})
 	if err != nil {
 		return
 	}

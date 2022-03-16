@@ -3,11 +3,6 @@
 
 package main
 
-import (
-	"FitnessSpace/provider"
-	"github.com/google/wire"
-)
-
-func InitDB() *provider.Database {
-	panic(wire.Build(provider.NewDB))
-}
+//func InitDB() *provider.Database {
+//	panic(wire.Build(provider.NewDB))
+//}

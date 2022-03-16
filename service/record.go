@@ -2,6 +2,7 @@ package service
 
 import (
 	"FitnessSpace/dao"
+	"FitnessSpace/model"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -22,11 +23,13 @@ func ListRecord(c *gin.Context) {
 
 // AddBuyRecord 新增购买记录
 func AddBuyRecord(c *gin.Context) {
-	_, ok := c.GetPostForm("name")
-	if !ok {
+	var br = model.BuyRecordRO{}
+	var err error
+	err = c.ShouldBind(&br)
+	if err != nil {
 		return
 	}
-	err := dao.AddBuyRecord(1, 9, 10, 3000)
+	err = dao.AddBuyRecord(&br)
 	if err != nil {
 		return
 	}
@@ -35,11 +38,13 @@ func AddBuyRecord(c *gin.Context) {
 
 // AddEndRecord 新增销课记录
 func AddEndRecord(c *gin.Context) {
-	_, ok := c.GetPostForm("id")
-	if !ok {
+	var er = model.EndRecordRO{}
+	var err error
+	err = c.ShouldBind(&er)
+	if err != nil {
 		return
 	}
-	err := dao.AddEndRecord(1, 9, 1, 3)
+	err = dao.AddEndRecord(&er)
 	if err != nil {
 		return
 	}

@@ -16,8 +16,8 @@ func GetAllMember() ([]model.Member, error) {
 	return ms, tx.Error
 }
 
-func AddOneMember(name string, card string, phone string, wx string, image string) error {
-	m := &model.Member{Name: name, Card: card, Phone: phone, WeiXin: wx, Image: image}
+func AddOneMember(mr *model.MemberRO) error {
+	m := &model.Member{Name: mr.Name, Card: mr.Card, Phone: mr.Phone, WeiXin: mr.WeiXin, Image: mr.Image}
 	tx := db.Create(&m)
 	return tx.Error
 }

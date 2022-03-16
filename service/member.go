@@ -2,6 +2,7 @@ package service
 
 import (
 	"FitnessSpace/dao"
+	"FitnessSpace/model"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -36,13 +37,15 @@ func ListMember(c *gin.Context) {
 
 // AddMember 新增会员
 func AddMember(c *gin.Context) {
-	name, ok := c.GetPostForm("name")
-	if !ok {
-		return
-	}
-	err := dao.AddOneMember(name, name, name, name, name)
+	var mr = model.MemberRO{}
+	var err error
+	err = c.ShouldBind(&mr)
 	if err != nil {
 		return
 	}
-	c.String(http.StatusOK, "添加成功")
+	err = dao.AddOneMember(&mr)
+	if err != nil {
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "添加成功"})
 }
